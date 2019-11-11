@@ -153,8 +153,11 @@ public final class Builder {
 
         boolean showWhen =  options.showClock();
         if(showWhen) {
-            builder.setShowWhen(showWhen)
-                 .setWhen(options.getWhen());
+            builder.setShowWhen(showWhen);
+
+            if(!options.isRepeating()) {
+                builder.setWhen(options.getWhen());
+            }
         }
 
         if (sound != Uri.EMPTY && !isUpdate()) {

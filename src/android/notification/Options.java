@@ -693,9 +693,21 @@ public final class Options {
         return options.optString("style", defaultValue);
     }
 
+    /**
+     * Get the "when" shown on the notification
+     * @note Is only applied when clock = true, and is a non-repeating notification
+     * @return The value in milliseconds since epoch. Defaults to now
+     */
     public long getWhen() {
         long now = System.currentTimeMillis();
         return options.optLong("when", now);
+    }
+
+    /**
+     * If it's a repeating notification.
+     */
+    public boolean isRepeating() {
+        return getTrigger().has("every");
     }
 }
 

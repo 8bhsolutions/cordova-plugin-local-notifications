@@ -139,7 +139,7 @@ public final class Notification {
      * If it's a repeating notification.
      */
     public boolean isRepeating() {
-        return getOptions().getTrigger().has("every");
+        return getOptions().isRepeating();
     }
 
     /**
