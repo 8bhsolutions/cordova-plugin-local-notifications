@@ -39,6 +39,8 @@ import android.graphics.RectF;
 import android.graphics.Paint;
 import android.graphics.Canvas;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.Random;
 
@@ -220,15 +222,38 @@ public final class Builder {
     }
 
     /**
-     * Find out and set the notification style.
+     * Set the notification style.
      *
      * @param builder Local notification builder instance.
      */
     private void applyStyle(NotificationCompat.Builder builder) {
+        String style = options.getStyle("default");
+
+        Log.d(TAG, "applyStyle: style " + style);
+
+        switch(style) {
+            case "inbox":
+                applyInboxStyle(builder);
+                break;
+            case "bigText":
+                applyBigTextStyle(builder);
+                break;
+
+            default:
+                inferStyle(builder);
+                break;
+        }
+    }
+
+    /**
+     * Infer the notification style based on options properties
+     */
+    private void inferStyle(NotificationCompat.Builder builder) {
         Message[] messages = options.getMessages();
         String summary     = options.getSummary();
 
         if (messages != null) {
+            Log.d(TAG, "inferStyle: Message Style");
             applyMessagingStyle(builder, messages);
             return;
         }
@@ -236,6 +261,7 @@ public final class Builder {
         MediaSessionCompat.Token token = options.getMediaSessionToken();
 
         if (token != null) {
+            Log.d(TAG, "inferStyle: Media Style");
             applyMediaStyle(builder, token);
             return;
         }
@@ -243,6 +269,7 @@ public final class Builder {
         List<Bitmap> pics = options.getAttachments();
 
         if (pics.size() > 0) {
+            Log.d(TAG, "inferStyle: Big Picture Style");
             applyBigPictureStyle(builder, pics);
             return;
         }
@@ -250,13 +277,17 @@ public final class Builder {
         String text = options.getText();
 
         if (text != null && text.contains("\n")) {
+            Log.d(TAG, "inferStyle: Inbox Style");
             applyInboxStyle(builder);
             return;
         }
 
-        if (text == null || summary == null && text.length() < 45)
+        if (text == null || summary == null && text.length() < 45) {
+            Log.d(TAG, "inferStyle: No style ??");
             return;
+        }
 
+        Log.d(TAG, "inferStyle: Big Text Style");
         applyBigTextStyle(builder);
     }
 

@@ -684,6 +684,14 @@ public final class Options {
         return (hex.charAt(0) == '#') ? hex.substring(1) : hex;
     }
 
+    /**
+     * Return the notification style option.
+     * 
+     * @param defaultValue The defaultValue to return if style is not specified.
+     */
+    public String getStyle(String defaultValue) {
+        return options.optString("style", defaultValue);
+    }
 }
 
 // codebeat:enable[TOO_MANY_FUNCTIONS]
