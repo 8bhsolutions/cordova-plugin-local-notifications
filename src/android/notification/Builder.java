@@ -55,6 +55,8 @@ import static de.appplant.cordova.plugin.notification.Notification.EXTRA_UPDATE;
  */
 public final class Builder {
 
+    private static final String TAG = "LocalNotification.Builder";
+
     // Application context passed by constructor
     private final Context context;
 
