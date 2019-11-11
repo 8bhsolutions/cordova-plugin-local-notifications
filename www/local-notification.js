@@ -58,6 +58,7 @@ exports._defaults = {
     vibrate       : false,
     wakeup        : true,
     style         : null,
+    when          : null,
 };
 
 // Event listener

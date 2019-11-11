@@ -145,12 +145,17 @@ public final class Builder {
                 .setColor(options.getColor())
                 .setVisibility(options.getVisibility())
                 .setPriority(options.getPrio())
-                .setShowWhen(options.showClock())
                 .setUsesChronometer(options.showChronometer())
                 .setGroup(options.getGroup())
                 .setGroupSummary(options.getGroupSummary())
                 .setTimeoutAfter(options.getTimeout())
                 .setLights(options.getLedColor(), options.getLedOn(), options.getLedOff());
+
+        boolean showWhen =  options.showClock();
+        if(showWhen) {
+            builder.setShowWhen(showWhen)
+                 .setWhen(options.getWhen());
+        }
 
         if (sound != Uri.EMPTY && !isUpdate()) {
             builder.setSound(sound);

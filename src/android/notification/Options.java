@@ -692,6 +692,11 @@ public final class Options {
     public String getStyle(String defaultValue) {
         return options.optString("style", defaultValue);
     }
+
+    public long getWhen() {
+        long now = System.currentTimeMillis();
+        return options.optLong("when", now);
+    }
 }
 
 // codebeat:enable[TOO_MANY_FUNCTIONS]
