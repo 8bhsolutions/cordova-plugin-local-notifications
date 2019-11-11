@@ -694,7 +694,7 @@ public final class Options {
     }
 
     /**
-     * Get the "when" shown on the notification
+     * Get the "when" value to be shown on the notification
      * @note Is only applied when clock = true, and is a non-repeating notification
      * @return The value in milliseconds since epoch. Defaults to now
      */
