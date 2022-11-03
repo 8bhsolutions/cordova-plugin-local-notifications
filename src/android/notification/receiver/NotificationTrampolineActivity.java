@@ -29,7 +29,7 @@ public class NotificationTrampolineActivity extends AppCompatActivity {
     /**
      * Launch main intent from package.
      */
-    private void launchApp() {
+    protected void launchApp() {
         Context context = getApplicationContext();
         String pkgName = context.getPackageName();
 
