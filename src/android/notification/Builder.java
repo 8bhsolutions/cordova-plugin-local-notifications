@@ -21,6 +21,7 @@
 
 package de.appplant.cordova.plugin.notification;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -55,6 +56,7 @@ import static de.appplant.cordova.plugin.notification.Notification.EXTRA_UPDATE;
  * Builder class for local notifications. Build fully configured local
  * notification specified by JSON object passed from JS side.
  */
+@SuppressLint("LongLogTag")
 public final class Builder {
     private static final String TAG = "LocalNotification.Builder";
 
@@ -444,7 +446,7 @@ public final class Builder {
 
         int reqCode = random.nextInt();
 
-        PendingIntent contentIntent = PendingIntent.getService(
+        PendingIntent contentIntent = PendingIntent.getActivity(
                 context, reqCode, intent, immutableFlag(FLAG_UPDATE_CURRENT));
 
         builder.setContentIntent(contentIntent);
@@ -494,7 +496,7 @@ public final class Builder {
 
         int reqCode = random.nextInt();
 
-        return PendingIntent.getService(
+        return PendingIntent.getActivity(
                 context, reqCode, intent, immutableFlag(FLAG_UPDATE_CURRENT));
     }
 
